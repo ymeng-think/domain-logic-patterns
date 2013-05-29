@@ -22,9 +22,8 @@ public class Gateway {
     }
 
     public ResultSet findRecognitionsFor(long contractID, Date asof) {
-        PreparedStatement command = null;
         try {
-            command = db.prepareStatement(findRecognitionsStatement);
+            PreparedStatement command = db.prepareStatement(findRecognitionsStatement);
             command.setLong(1, contractID);
             command.setDate(2, new java.sql.Date(asof.getTime()));
 
