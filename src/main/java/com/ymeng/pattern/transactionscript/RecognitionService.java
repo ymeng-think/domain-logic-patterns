@@ -1,6 +1,7 @@
 package com.ymeng.pattern.transactionscript;
 
 import com.ymeng.pattern.database.QueryException;
+import com.ymeng.pattern.transactionscript.sql.Gateway;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

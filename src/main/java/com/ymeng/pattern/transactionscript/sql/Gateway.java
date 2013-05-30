@@ -1,4 +1,4 @@
-package com.ymeng.pattern.transactionscript;
+package com.ymeng.pattern.transactionscript.sql;
 
 import com.ymeng.pattern.database.QueryException;
 
@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-import static com.ymeng.pattern.transactionscript.SQLCommand.FIND_CONTRACT_STATEMENT;
-import static com.ymeng.pattern.transactionscript.SQLCommand.FIND_RECOGNITIONS_STATEMENT;
+import static com.ymeng.pattern.transactionscript.sql.SQLCommand.FIND_CONTRACT_STATEMENT;
+import static com.ymeng.pattern.transactionscript.sql.SQLCommand.FIND_RECOGNITIONS_STATEMENT;
 
 public class Gateway {
 
