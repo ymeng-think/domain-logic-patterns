@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static com.ymeng.builder.DateBuilder.date;
+import static com.ymeng.matcher.DateEqualMatcher.eq;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -59,7 +60,7 @@ public class GatewayTest extends DatabaseTest {
         assertThat(result.getLong(1), is(1L));
         assertThat(result.getLong(2), is(10L));
         assertThat(result.getDouble(3), is(100.0));
-//        assertThat(result.getDate(4), is(date(2011, 1, 1)));
+        assertThat(result.getDate(4), eq(date(2011, 1, 1)));
         assertThat(result.next(), is(false));
     }
 
