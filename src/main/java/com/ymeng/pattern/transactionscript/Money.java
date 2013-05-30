@@ -2,6 +2,7 @@ package com.ymeng.pattern.transactionscript;
 
 public final class Money {
 
+    private static final double MONEY_THRESHOLD = 0.001;
     private double dollars;
 
     public static Money dollars(double dollars) {
@@ -16,9 +17,14 @@ public final class Money {
         double average = this.value() / count;
 
         Money[] allocation = new Money[count];
-        for (int i = 0; i < allocation.length; i++) {
-            allocation[i] = dollars(average);
+        double total = 0.0;
+        for (int i = 0; i < allocation.length - 1; i++) {
+            double value = keep2Precision(average);
+            allocation[i] = dollars(value);
+            total += value;
         }
+
+        allocation[allocation.length - 1] = dollars(keep2Precision(this.value() - total));
 
         return allocation;
     }
@@ -52,5 +58,9 @@ public final class Money {
 
     private Money(double dollars) {
         this.dollars = dollars;
+    }
+
+    private static double keep2Precision(double number) {
+        return ((int)((number + MONEY_THRESHOLD) * 100)) / 100.0d;
     }
 }
