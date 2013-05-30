@@ -4,7 +4,6 @@ import com.ymeng.pattern.database.Contract;
 import com.ymeng.pattern.database.DatabaseTest;
 import com.ymeng.pattern.database.Product;
 import com.ymeng.pattern.database.Recognition;
-import com.ymeng.pattern.transactionscript.sql.Gateway;
 import org.junit.Test;
 
 import java.sql.ResultSet;
