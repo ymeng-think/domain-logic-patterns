@@ -12,6 +12,17 @@ public final class Money {
         return Money.dollars(this.value() + money.value());
     }
 
+    public Money[] allocate(int count) {
+        double average = this.value() / count;
+
+        Money[] allocation = new Money[count];
+        for (int i = 0; i < allocation.length; i++) {
+            allocation[i] = dollars(average);
+        }
+
+        return allocation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
