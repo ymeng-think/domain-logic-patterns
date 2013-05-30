@@ -27,7 +27,8 @@ public class RecognitionService {
             return result;
         } catch (SQLException e) {
             throw new QueryException(e);
+        } finally {
+            gateway.close();
         }
-
     }
 }

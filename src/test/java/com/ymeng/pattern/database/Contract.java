@@ -18,8 +18,9 @@ public class Contract {
     }
 
     public void insert(long contractID, long productID, double revenue, Date dateSigned) {
+        PreparedStatement command = null;
         try {
-            PreparedStatement command = db.prepareStatement(insertContractStatement);
+            command = db.prepareStatement(insertContractStatement);
             command.setLong(1, contractID);
             command.setLong(2, productID);
             command.setDouble(3, revenue);
@@ -28,6 +29,12 @@ public class Contract {
             command.execute();
         } catch (SQLException e) {
             throw new InsertRowException();
+        } finally {
+            if (command != null) {
+                try {
+                    command.close();
+                } catch (SQLException e) {}
+            }
         }
     }
 }

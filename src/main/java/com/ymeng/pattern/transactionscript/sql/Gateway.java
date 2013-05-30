@@ -14,6 +14,7 @@ import static com.ymeng.pattern.transactionscript.sql.SQLCommand.FIND_RECOGNITIO
 public class Gateway {
 
     private Connection db;
+    private PreparedStatement command;
 
     public Gateway(Connection db) {
         this.db = db;
@@ -21,7 +22,7 @@ public class Gateway {
 
     public ResultSet findRecognitionsFor(long contractID, Date asof) {
         try {
-            PreparedStatement command = db.prepareStatement(FIND_RECOGNITIONS_STATEMENT);
+            command = db.prepareStatement(FIND_RECOGNITIONS_STATEMENT);
             command.setLong(1, contractID);
             command.setDate(2, new java.sql.Date(asof.getTime()));
 
@@ -33,12 +34,20 @@ public class Gateway {
 
     public ResultSet findContract(long contractID) {
         try {
-            PreparedStatement command = db.prepareStatement(FIND_CONTRACT_STATEMENT);
+            command = db.prepareStatement(FIND_CONTRACT_STATEMENT);
             command.setLong(1, contractID);
 
             return command.executeQuery();
         } catch (SQLException e) {
             throw new QueryException();
+        }
+    }
+
+    public void close() {
+        if (command != null) {
+            try {
+                command.close();
+            } catch (SQLException e) {}
         }
     }
 }
