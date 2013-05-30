@@ -7,7 +7,7 @@ public final class DateBuilder {
 
     public static Date date(int year, int month, int date) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, date);
+        calendar.set(year, month - 1, date);
 
         return calendar.getTime();
     }

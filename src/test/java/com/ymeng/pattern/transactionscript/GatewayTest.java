@@ -1,5 +1,6 @@
 package com.ymeng.pattern.transactionscript;
 
+import com.ymeng.pattern.database.Contract;
 import com.ymeng.pattern.database.DatabaseTest;
 import com.ymeng.pattern.database.Recognition;
 import org.junit.Test;
@@ -15,12 +16,14 @@ public class GatewayTest extends DatabaseTest {
 
     private Gateway gateway;
     private Recognition recognition;
+    private Contract contract;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
 
         recognition = new Recognition(connection);
+        contract = new Contract(connection);
         gateway = new Gateway(connection);
     }
 
@@ -38,7 +41,33 @@ public class GatewayTest extends DatabaseTest {
 
     @Test
     public void should_NOT_find_any_recognitions_when_key_is_NOT_match() throws SQLException {
-        ResultSet result = gateway.findRecognitionsFor(1L, date(2012, 2, 1));
+        recognition.insert(1L, 100, date(2012, 2, 1));
+
+        ResultSet result = gateway.findRecognitionsFor(1L, date(2012, 1, 31));
+
+        assertThat(result.next(), is(false));
+    }
+
+    @Test
+    public void should_find_contract_from_database() throws SQLException {
+        contract.insert(1L, 10L, 100, date(2011, 1, 1));
+        contract.insert(2L, 10L, 500, date(2011, 10, 1));
+
+        ResultSet result = gateway.findContract(1L);
+
+        assertThat(result.next(), is(true));
+        assertThat(result.getLong(1), is(1L));
+        assertThat(result.getLong(2), is(10L));
+        assertThat(result.getDouble(3), is(100.0));
+//        assertThat(result.getDate(4), is(date(2011, 1, 1)));
+        assertThat(result.next(), is(false));
+    }
+
+    @Test
+    public void should_NOT_find_any_contract_when_key_is_NOT_match() throws SQLException {
+        contract.insert(1L, 10L, 100, date(2011, 1, 1));
+
+        ResultSet result = gateway.findContract(2L);
 
         assertThat(result.next(), is(false));
     }

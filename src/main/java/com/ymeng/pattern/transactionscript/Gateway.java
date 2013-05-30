@@ -14,6 +14,8 @@ public class Gateway {
             "SELECT amount "
             + " FROM revenue_recognition"
             + " WHERE contract = ? AND recognized_on <= ?";
+    private static final String findContractStatement =
+            "SELECT * FROM contract WHERE id = ?";
 
     private Connection db;
 
@@ -26,6 +28,17 @@ public class Gateway {
             PreparedStatement command = db.prepareStatement(findRecognitionsStatement);
             command.setLong(1, contractID);
             command.setDate(2, new java.sql.Date(asof.getTime()));
+
+            return command.executeQuery();
+        } catch (SQLException e) {
+            throw new QueryException();
+        }
+    }
+
+    public ResultSet findContract(long contractID) {
+        try {
+            PreparedStatement command = db.prepareStatement(findContractStatement);
+            command.setLong(1, contractID);
 
             return command.executeQuery();
         } catch (SQLException e) {
