@@ -1,0 +1,31 @@
+package com.ymeng.pattern.database;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class Product {
+
+    private static final String insertProductStatement =
+            "INSERT INTO product(id, name, type)"
+                    + " VALUES(?, ?, ?)";
+
+    private Connection db;
+
+    public Product(Connection db) {
+        this.db = db;
+    }
+
+    public void insert(long productID, String name, String type) {
+        try {
+            PreparedStatement command = db.prepareStatement(insertProductStatement);
+            command.setLong(1, productID);
+            command.setString(2, name);
+            command.setString(3, type);
+
+            command.execute();
+        } catch (SQLException e) {
+            throw new InsertRowException();
+        }
+    }
+}

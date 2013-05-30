@@ -29,6 +29,5 @@ public class Contract {
         } catch (SQLException e) {
             throw new InsertRowException();
         }
-
     }
 }

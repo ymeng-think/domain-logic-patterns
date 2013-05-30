@@ -11,11 +11,14 @@ import java.util.Date;
 public class Gateway {
 
     private static final String findRecognitionsStatement =
-            "SELECT amount "
+            "SELECT amount"
             + " FROM revenue_recognition"
             + " WHERE contract = ? AND recognized_on <= ?";
+
     private static final String findContractStatement =
-            "SELECT * FROM contract WHERE id = ?";
+            "SELECT revenue, date_signed, type"
+            + " FROM contract INNER JOIN product ON contract.product = product.id"
+            + " WHERE contract.id = ?";
 
     private Connection db;
 
