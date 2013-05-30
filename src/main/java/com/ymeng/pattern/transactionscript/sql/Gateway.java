@@ -15,6 +15,7 @@ public class Gateway {
 
     private Connection db;
     private PreparedStatement command;
+    private ResultSet lastQueryResultSet;
 
     public Gateway(Connection db) {
         this.db = db;
@@ -26,7 +27,7 @@ public class Gateway {
             command.setLong(1, contractID);
             command.setDate(2, new java.sql.Date(asof.getTime()));
 
-            return command.executeQuery();
+            return queryBy(command);
         } catch (SQLException e) {
             throw new QueryException();
         }
@@ -37,7 +38,7 @@ public class Gateway {
             command = db.prepareStatement(FIND_CONTRACT_STATEMENT);
             command.setLong(1, contractID);
 
-            return command.executeQuery();
+            return queryBy(command);
         } catch (SQLException e) {
             throw new QueryException();
         }
@@ -49,5 +50,15 @@ public class Gateway {
                 command.close();
             } catch (SQLException e) {}
         }
+        if (lastQueryResultSet != null) {
+            try {
+                lastQueryResultSet.close();
+            } catch (SQLException e) {}
+        }
+    }
+
+    private ResultSet queryBy(PreparedStatement command) throws SQLException {
+        lastQueryResultSet = command.executeQuery();
+        return lastQueryResultSet;
     }
 }
