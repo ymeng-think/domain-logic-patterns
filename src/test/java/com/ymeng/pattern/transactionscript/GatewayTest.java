@@ -6,9 +6,8 @@ import org.junit.Test;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
 
+import static com.ymeng.builder.DateBuilder.date;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -44,10 +43,4 @@ public class GatewayTest extends DatabaseTest {
         assertThat(result.next(), is(false));
     }
 
-    private Date date(int year, int month, int date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, date);
-
-        return calendar.getTime();
-    }
 }

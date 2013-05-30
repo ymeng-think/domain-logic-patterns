@@ -4,9 +4,9 @@ import com.ymeng.pattern.database.DatabaseTest;
 import com.ymeng.pattern.database.Recognition;
 import org.junit.Test;
 
-import java.util.Calendar;
 import java.util.Date;
 
+import static com.ymeng.builder.DateBuilder.date;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -31,13 +31,5 @@ public class RecognitionServiceTest extends DatabaseTest {
         Money money = service.recognitionRevenue(1L, asOf);
 
         assertThat(money, is(Money.dollars(100)));
-    }
-
-
-    private Date date(int year, int month, int date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, date);
-
-        return calendar.getTime();
     }
 }
