@@ -17,10 +17,9 @@ public class Recognition {
         this.db = db;
     }
 
-    public void insert(int contractID, double amount, Date recognizedOn) {
-        PreparedStatement command = null;
+    public void insert(long contractID, double amount, Date recognizedOn) {
         try {
-            command = db.prepareStatement(insertRecognitionStatement);
+            PreparedStatement command = db.prepareStatement(insertRecognitionStatement);
             command.setLong(1, contractID);
             command.setDouble(2, amount);
             command.setDate(3, new java.sql.Date(recognizedOn.getTime()));

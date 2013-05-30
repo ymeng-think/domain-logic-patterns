@@ -27,10 +27,10 @@ public class GatewayTest extends DatabaseTest {
 
     @Test
     public void should_find_recognitions_from_database() throws SQLException {
-        recognition.insert(1, 100, date(2012, 2, 1));
-        recognition.insert(2, 100, date(2012, 2, 2));
+        recognition.insert(1L, 100, date(2012, 2, 1));
+        recognition.insert(2L, 100, date(2012, 2, 2));
 
-        ResultSet result = gateway.findRecognitionsFor(1, date(2012, 2, 1));
+        ResultSet result = gateway.findRecognitionsFor(1L, date(2012, 2, 1));
 
         assertThat(result.next(), is(true));
         assertThat(result.getDouble(1), is(100.0));
@@ -39,7 +39,7 @@ public class GatewayTest extends DatabaseTest {
 
     @Test
     public void should_NOT_find_any_recognitions_when_key_is_NOT_match() throws SQLException {
-        ResultSet result = gateway.findRecognitionsFor(1, date(2012, 2, 1));
+        ResultSet result = gateway.findRecognitionsFor(1L, date(2012, 2, 1));
 
         assertThat(result.next(), is(false));
     }
