@@ -8,17 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import static com.ymeng.pattern.transactionscript.SQLCommand.FIND_CONTRACT_STATEMENT;
+import static com.ymeng.pattern.transactionscript.SQLCommand.FIND_RECOGNITIONS_STATEMENT;
+
 public class Gateway {
-
-    private static final String findRecognitionsStatement =
-            "SELECT amount"
-            + " FROM revenue_recognition"
-            + " WHERE contract = ? AND recognized_on <= ?";
-
-    private static final String findContractStatement =
-            "SELECT revenue, date_signed, type"
-            + " FROM contract INNER JOIN product ON contract.product = product.id"
-            + " WHERE contract.id = ?";
 
     private Connection db;
 
@@ -28,7 +21,7 @@ public class Gateway {
 
     public ResultSet findRecognitionsFor(long contractID, Date asof) {
         try {
-            PreparedStatement command = db.prepareStatement(findRecognitionsStatement);
+            PreparedStatement command = db.prepareStatement(FIND_RECOGNITIONS_STATEMENT);
             command.setLong(1, contractID);
             command.setDate(2, new java.sql.Date(asof.getTime()));
 
@@ -40,7 +33,7 @@ public class Gateway {
 
     public ResultSet findContract(long contractID) {
         try {
-            PreparedStatement command = db.prepareStatement(findContractStatement);
+            PreparedStatement command = db.prepareStatement(FIND_CONTRACT_STATEMENT);
             command.setLong(1, contractID);
 
             return command.executeQuery();
