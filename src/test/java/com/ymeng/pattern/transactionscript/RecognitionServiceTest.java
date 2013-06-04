@@ -74,6 +74,23 @@ public class RecognitionServiceTest extends DatabaseTest {
         result.close();
     }
 
+    @Test
+    public void should_calculate_revenue_recognitions_of_a_contract_about_databases() throws SQLException {
+        long contractID = 1L;
+        Date dateSigned = date(2012, 1, 1);
+        double revenue = 120.0;
+        buildContract("Microsoft SQL Server", "D", contractID, revenue, dateSigned);
+
+        service.calculateRevenueRecognitions(contractID);
+
+        ResultSet result = recognition.findAll();
+        assertThat(result, nextRowContains(contractID, 40.0, date(2012, 1, 1)));
+        assertThat(result, nextRowContains(contractID, 40.0, date(2012, 1, 31)));
+        assertThat(result, nextRowContains(contractID, 40.0, date(2012, 3, 1)));
+        assertThat(result.next(), is(false));
+        result.close();
+    }
+
     private void buildContract(String productName, String productType, long contractID, double revenue, Date dateSigned) {
         product.insert(1L, productName, productType);
         contract.insert(contractID, 1L, revenue, dateSigned);
