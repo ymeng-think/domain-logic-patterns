@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 import static com.ymeng.builder.DateBuilder.date;
 import static com.ymeng.matcher.DateEqualMatcher.eq;
+import static com.ymeng.pattern.transactionscript.Money.dollars;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -74,6 +75,16 @@ public class GatewayTest extends DatabaseTest {
 
         ResultSet result = gateway.findContract(2L);
 
+        assertThat(result.next(), is(false));
+    }
+
+    @Test
+    public void should_insert_recognition() throws SQLException {
+        gateway.insertRecognition(1L, dollars(100.0), date(2012, 2, 1));
+
+        ResultSet result = gateway.findRecognitionsFor(1L, date(2012, 2, 1));
+        assertThat(result.next(), is(true));
+        assertThat(result.getDouble(1), is(100.0));
         assertThat(result.next(), is(false));
     }
 

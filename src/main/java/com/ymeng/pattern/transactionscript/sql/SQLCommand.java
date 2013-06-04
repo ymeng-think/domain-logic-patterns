@@ -12,6 +12,10 @@ final class SQLCommand {
                     + " FROM contract INNER JOIN product ON contract.product = product.id"
                     + " WHERE contract.id = ?";
 
+    public static final String INSERT_RECOGNITION =
+            "INSERT INTO revenue_recognition(contract, amount, recognized_on)"
+                    + " VALUES(?, ?, ?)";
+
     private SQLCommand() {
     }
 }

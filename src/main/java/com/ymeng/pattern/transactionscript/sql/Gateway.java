@@ -1,6 +1,8 @@
 package com.ymeng.pattern.transactionscript.sql;
 
+import com.ymeng.pattern.database.InsertRowException;
 import com.ymeng.pattern.database.QueryException;
+import com.ymeng.pattern.transactionscript.Money;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +12,7 @@ import java.util.Date;
 
 import static com.ymeng.pattern.transactionscript.sql.SQLCommand.FIND_CONTRACT_STATEMENT;
 import static com.ymeng.pattern.transactionscript.sql.SQLCommand.FIND_RECOGNITIONS_STATEMENT;
+import static com.ymeng.pattern.transactionscript.sql.SQLCommand.INSERT_RECOGNITION;
 
 public class Gateway {
 
@@ -25,7 +28,7 @@ public class Gateway {
         try {
             command = db.prepareStatement(FIND_RECOGNITIONS_STATEMENT);
             command.setLong(1, contractID);
-            command.setDate(2, new java.sql.Date(asof.getTime()));
+            command.setDate(2, convertToSqlDate(asof));
 
             return queryBy(command);
         } catch (SQLException e) {
@@ -44,6 +47,23 @@ public class Gateway {
         }
     }
 
+    public void insertRecognition(long contractID, Money money, Date recognitionDate) {
+        try {
+            command = db.prepareStatement(INSERT_RECOGNITION);
+            command.setLong(1, contractID);
+            command.setDouble(2, money.value());
+            command.setDate(3, convertToSqlDate(recognitionDate));
+
+            saveBy(command);
+        } catch (SQLException e) {
+            throw new InsertRowException();
+        }
+    }
+
+    private java.sql.Date convertToSqlDate(Date date) {
+        return new java.sql.Date(date.getTime());
+    }
+
     public void close() {
         if (command != null) {
             try {
@@ -60,5 +80,9 @@ public class Gateway {
     private ResultSet queryBy(PreparedStatement command) throws SQLException {
         lastQueryResultSet = command.executeQuery();
         return lastQueryResultSet;
+    }
+
+    private void saveBy(PreparedStatement command) throws SQLException {
+        command.execute();
     }
 }

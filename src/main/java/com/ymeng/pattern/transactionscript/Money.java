@@ -52,7 +52,7 @@ public final class Money {
         return (int) (temp ^ (temp >>> 32));
     }
 
-    private double value() {
+    public double value() {
         return dollars;
     }
 
