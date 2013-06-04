@@ -31,4 +31,41 @@ public class RecognitionService {
             gateway.close();
         }
     }
+
+    public void calculateRevenueRecognitions(long contractNumber) {
+        ResultSet contracts = gateway.findContract(contractNumber);
+
+        Money totalRevenue = null;
+        Date recognitionDate = null;
+        String type = null;
+        try {
+            contracts.next();
+
+            totalRevenue = Money.dollars(contracts.getDouble("revenue"));
+            recognitionDate = new Date(contracts.getDate("date_signed").getTime());
+            type = contracts.getString("type");
+        } catch (SQLException e) {
+            throw new QueryException(e);
+        } finally {
+            gateway.close();
+        }
+
+        if (type.equals("S")) {
+            Money[] allocation = totalRevenue.allocate(3);
+            gateway.insertRecognition(contractNumber, allocation[0], recognitionDate);
+            gateway.insertRecognition(contractNumber, allocation[1], addDays(recognitionDate, 60));
+            gateway.insertRecognition(contractNumber, allocation[2], addDays(recognitionDate, 90));
+        } else if (type.equals("W")) {
+            gateway.insertRecognition(contractNumber, totalRevenue, recognitionDate);
+        } else if (type.equals("D")) {
+            Money[] allocation = totalRevenue.allocate(3);
+            gateway.insertRecognition(contractNumber, allocation[0], recognitionDate);
+            gateway.insertRecognition(contractNumber, allocation[1], addDays(recognitionDate, 30));
+            gateway.insertRecognition(contractNumber, allocation[2], addDays(recognitionDate, 60));
+        }
+    }
+
+    private Date addDays(Date date, int delta) {
+        return date;
+    }
 }

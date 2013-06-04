@@ -1,12 +1,17 @@
 package com.ymeng.pattern.transactionscript;
 
+import com.ymeng.pattern.database.Contract;
 import com.ymeng.pattern.database.DatabaseTest;
+import com.ymeng.pattern.database.Product;
 import com.ymeng.pattern.database.Recognition;
 import org.junit.Test;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 import static com.ymeng.builder.DateBuilder.date;
+import static com.ymeng.matcher.DataRowEqualMatcher.nextRowIs;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -14,11 +19,15 @@ public class RecognitionServiceTest extends DatabaseTest {
 
     private Recognition recognition;
     private RecognitionService service;
+    private Contract contract;
+    private Product product;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
 
+        product = new Product(connection);
+        contract = new Contract(connection);
         recognition = new Recognition(connection);
         service = new RecognitionService(connection);
     }
@@ -31,5 +40,25 @@ public class RecognitionServiceTest extends DatabaseTest {
         Money money = service.recognitionRevenue(1L, asOf);
 
         assertThat(money, is(Money.dollars(100)));
+    }
+
+    @Test
+    public void should_calculate_revenue_recognitions_of_a_contract_about_word_processors() throws SQLException {
+        long contractID = 1L;
+        Date dateSigned = date(2012, 2, 1);
+        double revenue = 100.0;
+        buildContract("Microsoft Word", "W", contractID, revenue, dateSigned);
+
+        service.calculateRevenueRecognitions(contractID);
+
+        ResultSet result = recognition.findAll();
+        assertThat(result, nextRowIs(new Object[]{contractID, revenue, dateSigned}));
+        assertThat(result.next(), is(false));
+        result.close();
+    }
+
+    private void buildContract(String productName, String productType, long contractID, double revenue, Date dateSigned) {
+        product.insert(1L, productName, productType);
+        contract.insert(contractID, 1L, revenue, dateSigned);
     }
 }
