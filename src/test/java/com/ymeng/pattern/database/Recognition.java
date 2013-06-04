@@ -12,7 +12,9 @@ public class Recognition {
             "INSERT INTO revenue_recognition(contract, amount, recognized_on)"
                     + " VALUES(?, ?, ?)";
     private static final String findAllRecognitionStatement =
-            "SELECT contract, amount, recognized_on FROM revenue_recognition";
+            "SELECT contract, amount, recognized_on"
+                    + " FROM revenue_recognition"
+                    + " ORDER BY contract, recognized_on";
 
     private Connection db;
 

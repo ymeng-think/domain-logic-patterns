@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import static com.ymeng.builder.DateBuilder.date;
-import static com.ymeng.matcher.DataRowEqualMatcher.nextRowIs;
+import static com.ymeng.matcher.DataRowEqualMatcher.nextRowContains;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -52,7 +52,24 @@ public class RecognitionServiceTest extends DatabaseTest {
         service.calculateRevenueRecognitions(contractID);
 
         ResultSet result = recognition.findAll();
-        assertThat(result, nextRowIs(new Object[]{contractID, revenue, dateSigned}));
+        assertThat(result, nextRowContains(contractID, revenue, dateSigned));
+        assertThat(result.next(), is(false));
+        result.close();
+    }
+
+    @Test
+    public void should_calculate_revenue_recognitions_of_a_contract_about_spreadsheets() throws SQLException {
+        long contractID = 1L;
+        Date dateSigned = date(2012, 1, 1);
+        double revenue = 120.0;
+        buildContract("Microsoft Excel", "S", contractID, revenue, dateSigned);
+
+        service.calculateRevenueRecognitions(contractID);
+
+        ResultSet result = recognition.findAll();
+        assertThat(result, nextRowContains(contractID, 40.0, date(2012, 1, 1)));
+        assertThat(result, nextRowContains(contractID, 40.0, date(2012, 3, 1)));
+        assertThat(result, nextRowContains(contractID, 40.0, date(2012, 3, 31)));
         assertThat(result.next(), is(false));
         result.close();
     }

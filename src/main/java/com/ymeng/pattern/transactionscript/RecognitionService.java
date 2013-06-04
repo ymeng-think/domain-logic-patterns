@@ -6,7 +6,10 @@ import com.ymeng.pattern.transactionscript.sql.Gateway;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
+
+import static java.util.Calendar.DATE;
 
 public class RecognitionService {
 
@@ -66,6 +69,10 @@ public class RecognitionService {
     }
 
     private Date addDays(Date date, int delta) {
-        return date;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(DATE, delta);
+
+        return calendar.getTime();
     }
 }
