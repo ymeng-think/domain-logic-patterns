@@ -1,5 +1,6 @@
 package com.ymeng.pattern.domainmodel;
 
+import com.sun.tools.internal.xjc.reader.xmlschema.ParticleBinder;
 import com.ymeng.pattern.domainmodel.strategy.CompleteRecognitionStrategy;
 import com.ymeng.pattern.domainmodel.strategy.ThreeWayRecognitionStrategy;
 
@@ -13,6 +14,10 @@ public class ProductBuilder {
 
     public static ProductBuilder MSExcel() {
         return new ProductBuilder(new ThreeWayRecognitionStrategy(60, 90));
+    }
+
+    public static ProductBuilder MSSql() {
+        return new ProductBuilder(new ThreeWayRecognitionStrategy(30, 60));
     }
 
     public Product build() {
