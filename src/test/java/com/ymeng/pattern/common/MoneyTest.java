@@ -1,4 +1,4 @@
-package com.ymeng.pattern.transactionscript;
+package com.ymeng.pattern.common;
 
 import com.ymeng.pattern.common.Money;
 import org.junit.Test;
