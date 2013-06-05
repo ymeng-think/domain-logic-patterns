@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 import static java.text.MessageFormat.format;
 
-final class DatabaseOperator {
+public final class DatabaseOperator {
 
     private static final String databaseName = "domain_logic_patterns";
     private static final String userName = "root";
