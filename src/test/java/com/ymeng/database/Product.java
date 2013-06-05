@@ -4,6 +4,7 @@ import com.ymeng.pattern.database.InsertRowException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Product {
@@ -11,6 +12,8 @@ public class Product {
     private static final String insertProductStatement =
             "INSERT INTO product(id, name, type)"
                     + " VALUES(?, ?, ?)";
+    private static final String findAllProductsStatement =
+            "SELECT * FROM product";
 
     private Connection db;
 
@@ -36,5 +39,9 @@ public class Product {
                 } catch (SQLException e) {}
             }
         }
+    }
+
+    public ResultSet findAll() {
+        return DatabaseOperator.findAll(db, findAllProductsStatement);
     }
 }

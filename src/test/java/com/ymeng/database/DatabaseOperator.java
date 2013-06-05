@@ -1,9 +1,8 @@
 package com.ymeng.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.ymeng.pattern.database.InsertRowException;
+
+import java.sql.*;
 
 import static java.text.MessageFormat.format;
 
@@ -36,6 +35,17 @@ public final class DatabaseOperator {
             }
         } catch (SQLException e) {
             throw new TruncateTableException();
+        }
+    }
+
+    public static ResultSet findAll(Connection connection, String statement) {
+        PreparedStatement command = null;
+        try {
+            command = connection.prepareStatement(statement);
+
+            return command.executeQuery();
+        } catch (SQLException e) {
+            throw new InsertRowException();
         }
     }
 
