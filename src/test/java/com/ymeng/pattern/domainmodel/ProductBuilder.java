@@ -1,6 +1,5 @@
 package com.ymeng.pattern.domainmodel;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.ParticleBinder;
 import com.ymeng.pattern.domainmodel.strategy.CompleteRecognitionStrategy;
 import com.ymeng.pattern.domainmodel.strategy.ThreeWayRecognitionStrategy;
 
