@@ -23,8 +23,11 @@ public class Contract {
         return revenue;
     }
 
+    public Date whenSigned() {
+        return whenSigned;
+    }
+
     public List<RevenueRecognition> calculateRecognitions() {
         return product.calculateRevenueRecognitions(this);
     }
-
 }

@@ -6,7 +6,25 @@ import java.util.Date;
 
 public class RevenueRecognition {
 
-    private Money amount;
-    private Date recognizedOn;
+    private final Contract contract;
+    private final Money amount;
+    private final Date recognizedOn;
 
+    public RevenueRecognition(Contract contract, Money amount, Date recognizedOn) {
+        this.contract = contract;
+        this.amount = amount;
+        this.recognizedOn = recognizedOn;
+    }
+
+    public Contract contract() {
+        return contract;
+    }
+
+    public Money amount() {
+        return amount;
+    }
+
+    public Date recognizedOn() {
+        return recognizedOn;
+    }
 }
