@@ -1,8 +1,8 @@
 package com.ymeng.pattern;
 
-import com.ymeng.pattern.database.Contract;
-import com.ymeng.pattern.database.Product;
-import com.ymeng.pattern.database.Recognition;
+import com.ymeng.database.Contract;
+import com.ymeng.database.Product;
+import com.ymeng.database.Recognition;
 import com.ymeng.pattern.transactionscript.RecognitionService;
 
 import java.io.BufferedReader;
@@ -14,8 +14,8 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import static com.ymeng.builder.DateBuilder.date;
-import static com.ymeng.pattern.database.DatabaseOperator.cleanAllTables;
-import static com.ymeng.pattern.database.DatabaseOperator.connect;
+import static com.ymeng.database.DatabaseOperator.cleanAllTables;
+import static com.ymeng.database.DatabaseOperator.connect;
 
 public class Main {
 

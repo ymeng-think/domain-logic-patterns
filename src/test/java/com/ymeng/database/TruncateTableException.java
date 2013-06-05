@@ -1,4 +1,4 @@
-package com.ymeng.pattern.database;
+package com.ymeng.database;
 
 public class TruncateTableException extends RuntimeException {
 }

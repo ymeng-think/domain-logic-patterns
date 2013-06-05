@@ -1,4 +1,4 @@
-package com.ymeng.pattern.database;
+package com.ymeng.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

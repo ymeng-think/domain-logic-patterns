@@ -1,4 +1,6 @@
-package com.ymeng.pattern.database;
+package com.ymeng.database;
+
+import com.ymeng.pattern.database.InsertRowException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

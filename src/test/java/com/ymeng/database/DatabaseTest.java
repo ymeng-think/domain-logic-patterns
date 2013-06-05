@@ -1,12 +1,12 @@
-package com.ymeng.pattern.database;
+package com.ymeng.database;
 
 import org.junit.After;
 import org.junit.Before;
 
 import java.sql.Connection;
 
-import static com.ymeng.pattern.database.DatabaseOperator.cleanAllTables;
-import static com.ymeng.pattern.database.DatabaseOperator.connect;
+import static com.ymeng.database.DatabaseOperator.cleanAllTables;
+import static com.ymeng.database.DatabaseOperator.connect;
 
 public abstract class DatabaseTest {
 

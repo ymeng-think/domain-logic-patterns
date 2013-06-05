@@ -1,10 +1,10 @@
 package com.ymeng.pattern.transactionscript;
 
 import com.ymeng.pattern.common.Money;
-import com.ymeng.pattern.database.Contract;
-import com.ymeng.pattern.database.DatabaseTest;
-import com.ymeng.pattern.database.Product;
-import com.ymeng.pattern.database.Recognition;
+import com.ymeng.database.Contract;
+import com.ymeng.database.DatabaseTest;
+import com.ymeng.database.Product;
+import com.ymeng.database.Recognition;
 import org.junit.Test;
 
 import java.sql.ResultSet;
