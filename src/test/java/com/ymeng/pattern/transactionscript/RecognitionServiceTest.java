@@ -1,5 +1,6 @@
 package com.ymeng.pattern.transactionscript;
 
+import com.ymeng.pattern.common.Money;
 import com.ymeng.pattern.database.Contract;
 import com.ymeng.pattern.database.DatabaseTest;
 import com.ymeng.pattern.database.Product;

@@ -1,4 +1,4 @@
-package com.ymeng.pattern.transactionscript;
+package com.ymeng.pattern.common;
 
 public final class Money {
 

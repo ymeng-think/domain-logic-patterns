@@ -2,7 +2,7 @@ package com.ymeng.pattern.transactionscript.sql;
 
 import com.ymeng.pattern.database.InsertRowException;
 import com.ymeng.pattern.database.QueryException;
-import com.ymeng.pattern.transactionscript.Money;
+import com.ymeng.pattern.common.Money;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

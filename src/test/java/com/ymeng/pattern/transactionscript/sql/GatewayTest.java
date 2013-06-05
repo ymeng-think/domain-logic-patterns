@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 import static com.ymeng.builder.DateBuilder.date;
 import static com.ymeng.matcher.DateEqualMatcher.eq;
-import static com.ymeng.pattern.transactionscript.Money.dollars;
+import static com.ymeng.pattern.common.Money.dollars;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 

@@ -1,8 +1,9 @@
 package com.ymeng.pattern.transactionscript;
 
+import com.ymeng.pattern.common.Money;
 import org.junit.Test;
 
-import static com.ymeng.pattern.transactionscript.Money.dollars;
+import static com.ymeng.pattern.common.Money.dollars;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 

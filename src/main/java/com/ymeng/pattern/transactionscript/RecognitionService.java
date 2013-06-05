@@ -1,5 +1,6 @@
 package com.ymeng.pattern.transactionscript;
 
+import com.ymeng.pattern.common.Money;
 import com.ymeng.pattern.database.QueryException;
 import com.ymeng.pattern.transactionscript.sql.Gateway;
 
