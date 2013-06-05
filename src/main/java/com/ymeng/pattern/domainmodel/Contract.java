@@ -9,12 +9,18 @@ import static com.ymeng.pattern.common.Money.dollars;
 
 public class Contract {
 
-    private Product product;
-    private double revenue;
-    private Date whenSigned;
+    private final Product product;
+    private final Money revenue;
+    private final Date whenSigned;
 
-    public Money recognizedRevenue(Date asOf) {
-        return dollars(0);
+    public Contract(Product product, double revenue, Date whenSigned) {
+        this.product = product;
+        this.revenue = dollars(revenue);
+        this.whenSigned = whenSigned;
+    }
+
+    public Money recognizedRevenue() {
+        return revenue;
     }
 
     public List<RevenueRecognition> calculateRecognitions() {
