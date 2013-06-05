@@ -9,6 +9,7 @@ import java.util.List;
 import static com.ymeng.builder.DateBuilder.date;
 import static com.ymeng.matcher.DateEqualMatcher.eq;
 import static com.ymeng.pattern.common.Money.dollars;
+import static com.ymeng.pattern.domainmodel.ProductBuilder.MSExcel;
 import static com.ymeng.pattern.domainmodel.ProductBuilder.MSWord;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,10 +17,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContractTest {
 
     private Product msWord;
+    private Product msExcel;
 
     @Before
     public void setUp() throws Exception {
         msWord = MSWord().build();
+        msExcel = MSExcel().build();
     }
 
     @Test
@@ -42,6 +45,27 @@ public class ContractTest {
         assertThat(firstRecognition.contract(), is(contract));
         assertThat(firstRecognition.amount(), is(contract.recognizedRevenue()));
         assertThat(firstRecognition.recognizedOn(), eq(contract.whenSigned()));
+    }
+
+    @Test
+    public void should_calculate_revenue_recognitions_of_a_contract_about_spreadsheets() {
+        Contract contract = new Contract(msExcel, 120.0, date(2012, 1, 1));
+
+        List<RevenueRecognition> revenueRecognitions = contract.calculateRecognitions();
+
+        assertThat(revenueRecognitions.size(), is(3));
+        RevenueRecognition firstRecognition = revenueRecognitions.get(0);
+        assertThat(firstRecognition.contract(), is(contract));
+        assertThat(firstRecognition.amount(), is(dollars(40.0)));
+        assertThat(firstRecognition.recognizedOn(), eq(date(2012, 1, 1)));
+        RevenueRecognition secondRecognition = revenueRecognitions.get(1);
+        assertThat(secondRecognition.contract(), is(contract));
+        assertThat(secondRecognition.amount(), is(dollars(40.0)));
+        assertThat(secondRecognition.recognizedOn(), eq(date(2012, 3, 1)));
+        RevenueRecognition thirdRecognition = revenueRecognitions.get(2);
+        assertThat(thirdRecognition.contract(), is(contract));
+        assertThat(thirdRecognition.amount(), is(dollars(40.0)));
+        assertThat(thirdRecognition.recognizedOn(), eq(date(2012, 3, 31)));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.ymeng.pattern.domainmodel;
 
 import com.ymeng.pattern.domainmodel.strategy.CompleteRecognitionStrategy;
+import com.ymeng.pattern.domainmodel.strategy.ThreeWayRecognitionStrategy;
 
 public class ProductBuilder {
 
@@ -8,6 +9,10 @@ public class ProductBuilder {
 
     public static ProductBuilder MSWord() {
         return new ProductBuilder(new CompleteRecognitionStrategy());
+    }
+
+    public static ProductBuilder MSExcel() {
+        return new ProductBuilder(new ThreeWayRecognitionStrategy(60, 90));
     }
 
     public Product build() {
