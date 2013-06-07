@@ -20,9 +20,10 @@ public class FlattenerTest {
 
         assertThat(flatObjects.size(), is(1));
         FlatObject firstFlatObject = flatObjects.get(0);
+        assertThat(firstFlatObject.tableName(), is("DummyProduct"));
         assertThat(firstFlatObject.fields(), contains("id", "name", "type"));
         assertThat(firstFlatObject, is(newObject()));
-        assertThat((String)firstFlatObject.getValue("name"), is("MS Word"));
-        assertThat((String)firstFlatObject.getValue("type"), is("W"));
+        assertThat((String)firstFlatObject.value("name"), is("MS Word"));
+        assertThat((String)firstFlatObject.value("type"), is("W"));
     }
 }

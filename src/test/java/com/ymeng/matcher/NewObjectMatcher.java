@@ -10,7 +10,7 @@ public class NewObjectMatcher extends TypeSafeMatcher<FlatObject> {
 
     @Override
     protected boolean matchesSafely(FlatObject flatObject) {
-        return ((Long)flatObject.getValue("id")) == INVALID_ID;
+        return ((Long)flatObject.value("id")) == INVALID_ID;
     }
 
     @Override

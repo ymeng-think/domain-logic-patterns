@@ -6,7 +6,12 @@ import java.util.Set;
 
 public class FlatObject {
 
-    private Map<String, Object> fieldMap = new HashMap<String, Object>();
+    private final Map<String, Object> fieldMap = new HashMap<String, Object>();
+    private final String tableName;
+
+    public FlatObject(String tableName) {
+        this.tableName = tableName;
+    }
 
     public void registerField(String name, Object value) {
         fieldMap.put(name, value);
@@ -16,7 +21,11 @@ public class FlatObject {
         return fieldMap.keySet();
     }
 
-    public Object getValue(String fieldName) {
+    public Object value(String fieldName) {
         return fieldMap.get(fieldName);
+    }
+
+    public String tableName() {
+        return tableName;
     }
 }

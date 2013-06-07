@@ -13,8 +13,9 @@ public class Flattener {
     }
 
     public List<FlatObject> flatten() {
+        String tableName = extractTableName();
         Field[] fields = extractFields();
-        FlatObject flatObject = convertToFlatObject(fields);
+        FlatObject flatObject = convertToFlatObject(tableName, fields);
 
         ArrayList<FlatObject> flatObjects = new ArrayList<FlatObject>();
         flatObjects.add(flatObject);
@@ -22,8 +23,8 @@ public class Flattener {
         return flatObjects;
     }
 
-    private FlatObject convertToFlatObject(Field[] fields) {
-        FlatObject flatObject = new FlatObject();
+    private FlatObject convertToFlatObject(String tableName, Field[] fields) {
+        FlatObject flatObject = new FlatObject(tableName);
 
         for (Field field : fields) {
             field.setAccessible(true);
@@ -39,6 +40,10 @@ public class Flattener {
         } catch (IllegalAccessException e) {
             throw new FieldValueAccessException();
         }
+    }
+
+    private String extractTableName() {
+        return target.getClass().getSimpleName();
     }
 
     private Field[] extractFields() {
