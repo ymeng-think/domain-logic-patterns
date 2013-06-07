@@ -1,7 +1,7 @@
 package com.ymeng.orm;
 
 import com.ymeng.database.DatabaseTest;
-import com.ymeng.database.Product;
+import com.ymeng.orm.dummy.Product;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -13,19 +13,19 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ProductPersistenceTest extends DatabaseTest {
 
-    private Product productTable;
+    private com.ymeng.database.Product productTable;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
 
-        productTable = new Product(connection);
+        productTable = new com.ymeng.database.Product(connection);
     }
 
     @Test
     @Ignore
     public void should_persist_product_to_database() throws SQLException {
-        DummyProduct product = new DummyProduct("MS Word", "W");
+        Product product = new Product("MS Word", "W");
 
         product.save();
 
