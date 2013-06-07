@@ -1,8 +1,10 @@
 package com.ymeng.orm;
 
+import javax.swing.event.TreeExpansionEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 import static java.text.MessageFormat.format;
 
@@ -36,6 +38,8 @@ public class Database {
         }
     };
 
+
+    public static final long INVALID_ID = -1;
     private final Connection connection;
 
     public Database(Connection connection) {
@@ -47,6 +51,11 @@ public class Database {
     }
 
     public void save(Object obj) {
+//        Flattener flattener = new Flattener(obj);
+//        List<FlatObject> flatObjects = flattener.flatten();
+//        for (FlatObject flatObject : flatObjects) {
+//            flatObject.save();
+//        }
     }
 
 }
