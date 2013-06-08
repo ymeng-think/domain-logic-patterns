@@ -43,11 +43,30 @@ public class Flattener {
     }
 
     private String extractTableName() {
-        return target.getClass().getSimpleName();
+        Class<?> targetClass = target.getClass();
+        String tableName;
+
+        if (isMarkedByTable(targetClass)) {
+            tableName = extractTableNameFromAnnotation(targetClass);
+        } else {
+            tableName = targetClass.getSimpleName();
+        }
+
+        return tableName.toLowerCase();
     }
 
     private Field[] extractFields() {
         Class<?> targetClass = target.getClass();
         return targetClass.getDeclaredFields();
+    }
+
+    private static String extractTableNameFromAnnotation(Class<?> clazz) {
+        Table annotation = clazz.getAnnotation(Table.class);
+        return annotation.name();
+    }
+
+    private static boolean isMarkedByTable(Class<?> clazz) {
+        Table annotation = clazz.getAnnotation(Table.class);
+        return annotation != null;
     }
 }
