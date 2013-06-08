@@ -1,6 +1,6 @@
 package com.ymeng.orm.extracting;
 
-import com.ymeng.orm.Table;
+import com.ymeng.orm.annotation.Table;
 
 public class TableNameExtractor {
 

@@ -1,4 +1,4 @@
-package com.ymeng.orm;
+package com.ymeng.orm.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

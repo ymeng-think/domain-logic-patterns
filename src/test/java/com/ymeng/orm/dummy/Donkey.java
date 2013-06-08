@@ -1,6 +1,6 @@
 package com.ymeng.orm.dummy;
 
-import com.ymeng.orm.Table;
+import com.ymeng.orm.annotation.Table;
 
 @Table(name = "Animal")
 public class Donkey {
