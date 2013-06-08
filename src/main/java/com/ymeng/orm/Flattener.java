@@ -3,8 +3,6 @@ package com.ymeng.orm;
 import com.ymeng.orm.extracting.TableNameExtractor;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Flattener {
 
@@ -14,12 +12,12 @@ public class Flattener {
         this.target = target;
     }
 
-    public List<FlatObject> flatten() {
+    public FlatObjectCollection flatten() {
         String tableName = extractTableName();
         Field[] fields = extractFields();
         FlatObject flatObject = convertToFlatObject(tableName, fields);
 
-        ArrayList<FlatObject> flatObjects = new ArrayList<FlatObject>();
+        FlatObjectCollection flatObjects = new FlatObjectCollection();
         flatObjects.add(flatObject);
 
         return flatObjects;

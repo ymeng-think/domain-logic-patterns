@@ -4,8 +4,6 @@ import com.ymeng.orm.dummy.Donkey;
 import com.ymeng.orm.dummy.Product;
 import org.junit.Test;
 
-import java.util.List;
-
 import static com.ymeng.matcher.ListEqualMatcher.contains;
 import static com.ymeng.matcher.NewObjectMatcher.newObject;
 import static org.hamcrest.CoreMatchers.is;
@@ -18,7 +16,7 @@ public class FlattenerTest {
         Product product = new Product("MS Word", "W");
         Flattener flattener = new Flattener(product);
 
-        List<FlatObject> flatObjects = flattener.flatten();
+        FlatObjectCollection flatObjects = flattener.flatten();
 
         assertThat(flatObjects.size(), is(1));
         FlatObject firstFlatObject = flatObjects.get(0);
@@ -34,7 +32,7 @@ public class FlattenerTest {
         Donkey donkey = new Donkey("Rap");
         Flattener flattener = new Flattener(donkey);
 
-        List<FlatObject> flatObjects = flattener.flatten();
+        FlatObjectCollection flatObjects = flattener.flatten();
 
         assertThat(flatObjects.size(), is(1));
         FlatObject firstFlatObject = flatObjects.get(0);
