@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.ymeng.orm.Database.INVALID_ID;
+import static com.ymeng.util.Collections.copy;
 
 public class FlatObject {
 
@@ -20,7 +21,7 @@ public class FlatObject {
     }
 
     public Set<String> fields() {
-        return fieldMap.keySet();
+        return copy(fieldMap.keySet());
     }
 
     public Object value(String fieldName) {
