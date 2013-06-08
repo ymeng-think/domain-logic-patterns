@@ -14,7 +14,7 @@ import java.util.Date;
 import static com.ymeng.builder.DateBuilder.date;
 import static com.ymeng.matcher.DataRowEqualMatcher.nextRowContains;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThat;
 
 public class RecognitionServiceTest extends DatabaseTest {
 

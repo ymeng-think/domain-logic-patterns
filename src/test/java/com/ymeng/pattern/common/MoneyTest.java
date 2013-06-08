@@ -1,11 +1,10 @@
 package com.ymeng.pattern.common;
 
-import com.ymeng.pattern.common.Money;
 import org.junit.Test;
 
 import static com.ymeng.pattern.common.Money.dollars;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThat;
 
 public class MoneyTest {
 

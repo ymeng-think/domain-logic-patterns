@@ -7,7 +7,7 @@ import org.junit.Test;
 import static com.ymeng.matcher.ListEqualMatcher.contains;
 import static com.ymeng.matcher.NewObjectMatcher.newObject;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThat;
 
 public class FlattenerTest {
 
