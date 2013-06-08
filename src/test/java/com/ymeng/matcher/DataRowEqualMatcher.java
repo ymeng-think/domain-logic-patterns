@@ -41,7 +41,7 @@ public class DataRowEqualMatcher extends TypeSafeMatcher<ResultSet> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("not equal row");
+        description.appendText("row is ").appendValue(expected);
     }
 
     public static Matcher<ResultSet> nextRowContains(Object... expected) {

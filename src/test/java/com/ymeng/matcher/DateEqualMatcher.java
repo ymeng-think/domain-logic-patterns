@@ -21,7 +21,7 @@ public class DateEqualMatcher extends TypeSafeMatcher<Date> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("not equal date");
+        description.appendValue(expected);
     }
 
     public static Matcher<Date> eq(Date expected) {

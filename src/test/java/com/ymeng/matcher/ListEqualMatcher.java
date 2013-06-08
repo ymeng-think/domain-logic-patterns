@@ -30,7 +30,7 @@ public class ListEqualMatcher<T> extends TypeSafeMatcher<Set<T>> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("not equal set");
+        description.appendValue(expected);
     }
 
     public static ListEqualMatcher<String> contains(String... items) {
