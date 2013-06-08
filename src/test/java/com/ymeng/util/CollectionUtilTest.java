@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.ymeng.util.CollectionUtil.collect;
+import static com.ymeng.util.CollectionWrapper.collect;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

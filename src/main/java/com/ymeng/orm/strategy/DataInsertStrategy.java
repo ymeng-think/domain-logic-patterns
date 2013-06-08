@@ -3,7 +3,6 @@ package com.ymeng.orm.strategy;
 import com.ymeng.orm.FlatObject;
 import com.ymeng.pattern.database.InsertRowException;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static com.ymeng.util.CollectionUtil.collect;
+import static com.ymeng.util.CollectionWrapper.collect;
 
 public class DataInsertStrategy implements DataManipulationStrategy {
 

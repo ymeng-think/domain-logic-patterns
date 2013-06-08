@@ -2,18 +2,17 @@ package com.ymeng.util;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Set;
 
-public final class CollectionUtil {
+public final class CollectionWrapper {
 
     private final Collection<?> collection;
 
-    private CollectionUtil(Collection<?> collection) {
+    private CollectionWrapper(Collection<?> collection) {
         this.collection = collection;
     }
 
-    public static CollectionUtil collect(Collection<?> set) {
-        return new CollectionUtil(set);
+    public static CollectionWrapper collect(Collection<?> set) {
+        return new CollectionWrapper(set);
     }
 
     public String join(String separator) {
