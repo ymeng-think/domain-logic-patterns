@@ -51,11 +51,8 @@ public class Database {
     }
 
     public void save(Object obj) {
-//        Flattener flattener = new Flattener(obj);
-//        List<FlatObject> flatObjects = flattener.flatten();
-//        for (FlatObject flatObject : flatObjects) {
-//            flatObject.save();
-//        }
+        Flattener flattener = new Flattener(obj);
+        flattener.flatten().save(connection);
     }
 
 }

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static com.ymeng.orm.Database.INVALID_ID;
+
 public class FlatObject {
 
     private final Map<String, Object> fieldMap = new HashMap<String, Object>();
@@ -27,5 +29,9 @@ public class FlatObject {
 
     public String tableName() {
         return tableName;
+    }
+
+    public boolean isNew() {
+        return (Long)fieldMap.get("id") == INVALID_ID;
     }
 }
