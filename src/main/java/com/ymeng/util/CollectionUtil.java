@@ -8,11 +8,11 @@ public final class CollectionUtil {
 
     private final Collection<?> collection;
 
-    private CollectionUtil(Set<?> collection) {
+    private CollectionUtil(Collection<?> collection) {
         this.collection = collection;
     }
 
-    public static CollectionUtil collect(Set<?> set) {
+    public static CollectionUtil collect(Collection<?> set) {
         return new CollectionUtil(set);
     }
 

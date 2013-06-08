@@ -55,8 +55,10 @@ public class DataRowEqualMatcher extends TypeSafeMatcher<ResultSet> {
             return resultSet.getDouble(index) == (Double)expected;
         } else if (expected instanceof Date) {
             return new DateEqualMatcher((Date)expected).matchesSafely(convertToNormalDate(resultSet.getDate(index)));
+        } else if (expected instanceof String) {
+            return expected.equals(resultSet.getString(index));
         }
-        throw new IllegalArgumentException(format("Can NOT identify data type '{0}'", expected.getClass()));
+        throw new IllegalArgumentException(format("Can NOT identify data type <{0}>", expected.getClass()));
     }
 
     private Date convertToNormalDate(java.sql.Date date) {
