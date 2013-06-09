@@ -20,6 +20,10 @@ public final class Matchers {
         return new NewObjectMatcher();
     }
 
+    public static NoMoreDataRowMatcher noMoreRow() {
+        return new NoMoreDataRowMatcher();
+    }
+
     private Matchers() {
     }
 }

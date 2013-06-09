@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 import static com.ymeng.builder.DateBuilder.date;
 import static com.ymeng.matcher.Matchers.eq;
+import static com.ymeng.matcher.Matchers.noMoreRow;
 import static com.ymeng.pattern.common.Money.dollars;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -42,6 +43,7 @@ public class GatewayTest extends DatabaseTest {
         assertThat(result.next(), is(true));
         assertThat(result.getDouble(1), is(100.0));
         assertThat(result.next(), is(false));
+        assertThat(result, is(noMoreRow()));
     }
 
     @Test
@@ -50,7 +52,7 @@ public class GatewayTest extends DatabaseTest {
 
         ResultSet result = gateway.findRecognitionsFor(1L, date(2012, 1, 31));
 
-        assertThat(result.next(), is(false));
+        assertThat(result, is(noMoreRow()));
     }
 
     @Test
@@ -65,7 +67,7 @@ public class GatewayTest extends DatabaseTest {
         assertThat(result.getDouble(1), is(100.0));
         assertThat(result.getDate(2), eq(date(2011, 1, 1)));
         assertThat(result.getString(3), is("S"));
-        assertThat(result.next(), is(false));
+        assertThat(result, is(noMoreRow()));
     }
 
     @Test
@@ -75,7 +77,7 @@ public class GatewayTest extends DatabaseTest {
 
         ResultSet result = gateway.findContract(2L);
 
-        assertThat(result.next(), is(false));
+        assertThat(result, is(noMoreRow()));
     }
 
     @Test
@@ -85,7 +87,7 @@ public class GatewayTest extends DatabaseTest {
         ResultSet result = gateway.findRecognitionsFor(1L, date(2012, 2, 1));
         assertThat(result.next(), is(true));
         assertThat(result.getDouble(1), is(100.0));
-        assertThat(result.next(), is(false));
+        assertThat(result, is(noMoreRow()));
     }
 
 }

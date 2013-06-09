@@ -1,10 +1,10 @@
 package com.ymeng.pattern.transactionscript;
 
-import com.ymeng.pattern.common.Money;
 import com.ymeng.database.Contract;
 import com.ymeng.database.DatabaseTest;
 import com.ymeng.database.Product;
 import com.ymeng.database.Recognition;
+import com.ymeng.pattern.common.Money;
 import org.junit.Test;
 
 import java.sql.ResultSet;
@@ -13,6 +13,7 @@ import java.util.Date;
 
 import static com.ymeng.builder.DateBuilder.date;
 import static com.ymeng.matcher.Matchers.nextRowContains;
+import static com.ymeng.matcher.Matchers.noMoreRow;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -54,7 +55,7 @@ public class RecognitionServiceTest extends DatabaseTest {
 
         ResultSet result = recognition.findAll();
         assertThat(result, nextRowContains(contractID, revenue, dateSigned));
-        assertThat(result.next(), is(false));
+        assertThat(result, is(noMoreRow()));
         result.close();
     }
 
@@ -71,7 +72,7 @@ public class RecognitionServiceTest extends DatabaseTest {
         assertThat(result, nextRowContains(contractID, 40.0, date(2012, 1, 1)));
         assertThat(result, nextRowContains(contractID, 40.0, date(2012, 3, 1)));
         assertThat(result, nextRowContains(contractID, 40.0, date(2012, 3, 31)));
-        assertThat(result.next(), is(false));
+        assertThat(result, is(noMoreRow()));
         result.close();
     }
 
@@ -88,7 +89,7 @@ public class RecognitionServiceTest extends DatabaseTest {
         assertThat(result, nextRowContains(contractID, 40.0, date(2012, 1, 1)));
         assertThat(result, nextRowContains(contractID, 40.0, date(2012, 1, 31)));
         assertThat(result, nextRowContains(contractID, 40.0, date(2012, 3, 1)));
-        assertThat(result.next(), is(false));
+        assertThat(result, is(noMoreRow()));
         result.close();
     }
 
