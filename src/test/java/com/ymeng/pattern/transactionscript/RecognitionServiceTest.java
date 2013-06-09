@@ -23,6 +23,7 @@ public class RecognitionServiceTest extends DatabaseTest {
     private RecognitionService service;
     private Contract contract;
     private Product product;
+    private ResultSet result;
 
     @Override
     public void setUp() throws Exception {
@@ -32,6 +33,15 @@ public class RecognitionServiceTest extends DatabaseTest {
         contract = new Contract(connection);
         recognition = new Recognition(connection);
         service = new RecognitionService(connection);
+    }
+
+    @Override
+    public void tearDown() throws Exception {
+        if (result != null) {
+            result.close();
+        }
+
+        super.tearDown();
     }
 
     @Test
@@ -53,10 +63,9 @@ public class RecognitionServiceTest extends DatabaseTest {
 
         service.calculateRevenueRecognitions(contractID);
 
-        ResultSet result = recognition.findAll();
+        result = recognition.findAll();
         assertThat(result, nextRowContains(contractID, revenue, dateSigned));
         assertThat(result, is(noMoreRow()));
-        result.close();
     }
 
     @Test
@@ -68,12 +77,11 @@ public class RecognitionServiceTest extends DatabaseTest {
 
         service.calculateRevenueRecognitions(contractID);
 
-        ResultSet result = recognition.findAll();
+        result = recognition.findAll();
         assertThat(result, nextRowContains(contractID, 40.0, date(2012, 1, 1)));
         assertThat(result, nextRowContains(contractID, 40.0, date(2012, 3, 1)));
         assertThat(result, nextRowContains(contractID, 40.0, date(2012, 3, 31)));
         assertThat(result, is(noMoreRow()));
-        result.close();
     }
 
     @Test
@@ -85,12 +93,11 @@ public class RecognitionServiceTest extends DatabaseTest {
 
         service.calculateRevenueRecognitions(contractID);
 
-        ResultSet result = recognition.findAll();
+        result = recognition.findAll();
         assertThat(result, nextRowContains(contractID, 40.0, date(2012, 1, 1)));
         assertThat(result, nextRowContains(contractID, 40.0, date(2012, 1, 31)));
         assertThat(result, nextRowContains(contractID, 40.0, date(2012, 3, 1)));
         assertThat(result, is(noMoreRow()));
-        result.close();
     }
 
     private void buildContract(String productName, String productType, long contractID, double revenue, Date dateSigned) {
