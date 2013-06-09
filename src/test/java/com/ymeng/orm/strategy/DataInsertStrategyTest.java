@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static com.ymeng.matcher.Matchers.nextRowContains;
+import static com.ymeng.orm.Database.INVALID_ID;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -22,6 +23,7 @@ public class DataInsertStrategyTest extends DatabaseTest {
         super.setUp();
 
         newProduct = new FlatObject("product");
+        newProduct.registerField("id", INVALID_ID);
         newProduct.registerField("name", "MS Word");
         newProduct.registerField("type", "W");
 

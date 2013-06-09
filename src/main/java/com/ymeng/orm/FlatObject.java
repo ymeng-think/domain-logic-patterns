@@ -21,7 +21,15 @@ public class FlatObject {
     }
 
     public Set<String> fields() {
-        return copy(fieldMap.keySet());
+        Set<String> fields = copy(fieldMap.keySet());
+        if (isNew()) {
+            excludeKeyFields(fields);
+        }
+        return fields;
+    }
+
+    private void excludeKeyFields(Set<String> fields) {
+        fields.remove("id");
     }
 
     public Object value(String fieldName) {

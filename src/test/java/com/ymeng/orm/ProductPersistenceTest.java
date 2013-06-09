@@ -8,6 +8,8 @@ import org.junit.Test;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static com.ymeng.matcher.Matchers.nextRowContains;
+import static com.ymeng.matcher.Matchers.noMoreRow;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -23,14 +25,14 @@ public class ProductPersistenceTest extends DatabaseTest {
     }
 
     @Test
-    @Ignore
     public void should_persist_product_to_database() throws SQLException {
         Product product = new Product("MS Word", "W");
 
         product.save();
 
         ResultSet resultSet = productTable.findAll();
-        assertThat(resultSet.next(), is(true));
+        assertThat(resultSet, nextRowContains(1L, "MS Word", "W"));
+        assertThat(resultSet, is(noMoreRow()));
     }
 
 }
