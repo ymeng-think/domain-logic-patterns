@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static com.ymeng.matcher.DataRowEqualMatcher.nextRowContains;
+import static com.ymeng.matcher.Matchers.nextRowContains;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

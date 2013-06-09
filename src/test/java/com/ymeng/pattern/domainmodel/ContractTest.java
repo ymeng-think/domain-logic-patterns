@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static com.ymeng.builder.DateBuilder.date;
-import static com.ymeng.matcher.DateEqualMatcher.eq;
+import static com.ymeng.matcher.Matchers.eq;
 import static com.ymeng.pattern.common.Money.dollars;
 import static com.ymeng.pattern.domainmodel.ProductBuilder.*;
 import static org.hamcrest.CoreMatchers.is;

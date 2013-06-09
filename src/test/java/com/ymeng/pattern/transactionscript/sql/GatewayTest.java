@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static com.ymeng.builder.DateBuilder.date;
-import static com.ymeng.matcher.DateEqualMatcher.eq;
+import static com.ymeng.matcher.Matchers.eq;
 import static com.ymeng.pattern.common.Money.dollars;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

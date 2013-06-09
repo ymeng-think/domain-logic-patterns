@@ -4,8 +4,8 @@ import com.ymeng.orm.dummy.Donkey;
 import com.ymeng.orm.dummy.Product;
 import org.junit.Test;
 
-import static com.ymeng.matcher.ListEqualMatcher.contains;
-import static com.ymeng.matcher.NewObjectMatcher.newObject;
+import static com.ymeng.matcher.Matchers.contains;
+import static com.ymeng.matcher.Matchers.newObject;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

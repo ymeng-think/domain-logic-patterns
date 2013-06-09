@@ -44,10 +44,6 @@ public class DataRowEqualMatcher extends TypeSafeMatcher<ResultSet> {
         description.appendText("row is ").appendValue(expected);
     }
 
-    public static Matcher<ResultSet> nextRowContains(Object... expected) {
-        return new DataRowEqualMatcher(expected);
-    }
-
     private boolean isSameField(Object expected, ResultSet resultSet, int index) throws SQLException {
         if (expected instanceof Long) {
             return resultSet.getLong(index) == (Long)expected;

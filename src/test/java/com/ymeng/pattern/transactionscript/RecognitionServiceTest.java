@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import static com.ymeng.builder.DateBuilder.date;
-import static com.ymeng.matcher.DataRowEqualMatcher.nextRowContains;
+import static com.ymeng.matcher.Matchers.nextRowContains;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

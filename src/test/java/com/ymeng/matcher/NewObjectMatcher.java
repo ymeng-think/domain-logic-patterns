@@ -18,7 +18,4 @@ public class NewObjectMatcher extends TypeSafeMatcher<FlatObject> {
         description.appendText("it's a new object");
     }
 
-    public static NewObjectMatcher newObject() {
-        return new NewObjectMatcher();
-    }
 }

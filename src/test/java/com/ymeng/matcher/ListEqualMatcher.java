@@ -33,7 +33,4 @@ public class ListEqualMatcher<T> extends TypeSafeMatcher<Set<T>> {
         description.appendValue(expected);
     }
 
-    public static ListEqualMatcher<String> contains(String... items) {
-        return new ListEqualMatcher<String>(items);
-    }
 }

@@ -24,10 +24,6 @@ public class DateEqualMatcher extends TypeSafeMatcher<Date> {
         description.appendValue(expected);
     }
 
-    public static Matcher<Date> eq(Date expected) {
-        return new DateEqualMatcher(expected);
-    }
-
     private static boolean compare(Date date1, Date date2) {
         return date1.getYear() == date2.getYear() &&
                 date1.getMonth() == date2.getMonth() &&
