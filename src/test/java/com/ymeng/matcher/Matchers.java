@@ -12,8 +12,8 @@ public final class Matchers {
         return new DateEqualMatcher(expected);
     }
 
-    public static ListEqualMatcher<String> contains(String... items) {
-        return new ListEqualMatcher<String>(items);
+    public static SetContainingMatcher<String> contains(String... items) {
+        return new SetContainingMatcher<String>(items);
     }
 
     public static NewObjectMatcher newObject() {

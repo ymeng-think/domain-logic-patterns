@@ -5,11 +5,11 @@ import org.hamcrest.TypeSafeMatcher;
 
 import java.util.Set;
 
-public class ListEqualMatcher<T> extends TypeSafeMatcher<Set<T>> {
+public class SetContainingMatcher<T> extends TypeSafeMatcher<Set<T>> {
 
     private final T[] expected;
 
-    public ListEqualMatcher(T[] expected) {
+    public SetContainingMatcher(T[] expected) {
         this.expected = expected;
     }
 
