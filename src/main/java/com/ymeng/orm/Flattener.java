@@ -16,12 +16,19 @@ public class Flattener {
     public FlatObjectCollection flatten() {
         String tableName = extractTableName();
         Field[] fields = extractFields();
+        String[] primaryKeys = extractPrimaryKeys();
+
         FlatObject flatObject = convertToFlatObject(tableName, fields);
+        flatObject.registerPrimaryKeys(primaryKeys);
 
         FlatObjectCollection flatObjects = new FlatObjectCollection();
         flatObjects.add(flatObject);
 
         return flatObjects;
+    }
+
+    private String[] extractPrimaryKeys() {
+        return new String[] {"id"};
     }
 
     private FlatObject convertToFlatObject(String tableName, Field[] fields) {

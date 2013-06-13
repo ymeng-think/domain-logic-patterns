@@ -23,6 +23,7 @@ public class DataInsertStrategyTest extends DatabaseTest {
         super.setUp();
 
         newProduct = new FlatObject("product");
+        newProduct.registerPrimaryKeys("id");
         newProduct.registerField("id", INVALID_ID);
         newProduct.registerField("name", "MS Word");
         newProduct.registerField("type", "W");

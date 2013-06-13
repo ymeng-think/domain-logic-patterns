@@ -46,11 +46,6 @@ public class FlatObject {
     }
 
     private void excludePrimaryKeys(Set<String> fields) {
-        if (primaryKeys.size() == 0) {
-            fields.remove("id");
-            return;
-        }
-
         fields.removeAll(primaryKeys);
     }
 }
