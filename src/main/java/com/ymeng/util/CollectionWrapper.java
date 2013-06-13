@@ -1,7 +1,10 @@
 package com.ymeng.util;
 
+import com.google.common.collect.Lists;
+
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 public final class CollectionWrapper {
 
@@ -11,8 +14,13 @@ public final class CollectionWrapper {
         this.collection = collection;
     }
 
-    public static CollectionWrapper collect(Collection<?> set) {
-        return new CollectionWrapper(set);
+    public static <T> CollectionWrapper collect(T[] items) {
+        List<T> list = Lists.newArrayList(items);
+        return collect(list);
+    }
+
+    public static CollectionWrapper collect(Collection<?> collection) {
+        return new CollectionWrapper(collection);
     }
 
     public String join(String separator) {
