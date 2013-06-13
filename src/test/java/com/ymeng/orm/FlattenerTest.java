@@ -36,6 +36,9 @@ public class FlattenerTest {
 
         assertThat(flatObjects.size(), is(1));
         FlatObject firstFlatObject = flatObjects.get(0);
+        assertThat(firstFlatObject, is(newObject()));
         assertThat(firstFlatObject.tableName(), is("animal"));
+        assertThat(firstFlatObject.fields(), contains("nick_name"));
+        assertThat((String)firstFlatObject.value("nick_name"), is("Rap"));
     }
 }

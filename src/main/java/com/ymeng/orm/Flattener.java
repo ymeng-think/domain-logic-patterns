@@ -1,5 +1,6 @@
 package com.ymeng.orm;
 
+import com.ymeng.orm.extracting.FieldNameExtractor;
 import com.ymeng.orm.extracting.TableNameExtractor;
 
 import java.lang.reflect.Field;
@@ -28,10 +29,15 @@ public class Flattener {
 
         for (Field field : fields) {
             field.setAccessible(true);
-            flatObject.registerField(field.getName(), getFieldValue(field));
+            flatObject.registerField(extractFieldName(field), getFieldValue(field));
         }
 
         return flatObject;
+    }
+
+    private String extractFieldName(Field field) {
+        FieldNameExtractor extractor = new FieldNameExtractor(field);
+        return extractor.extract();
     }
 
     private Object getFieldValue(Field field) {

@@ -15,7 +15,7 @@ public class NewObjectMatcher extends TypeSafeMatcher<FlatObject> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("it's a new object");
+        description.appendText("a new object");
     }
 
 }
