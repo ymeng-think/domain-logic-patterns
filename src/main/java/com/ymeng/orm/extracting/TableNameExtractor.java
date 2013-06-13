@@ -22,12 +22,10 @@ public class TableNameExtractor {
         return tableName.toLowerCase();
     }
 
-
     private boolean isMarkedByTable() {
         Table annotation = clazz.getAnnotation(Table.class);
         return annotation != null;
     }
-
 
     private String extractTableNameFromAnnotation() {
         Table annotation = clazz.getAnnotation(Table.class);
