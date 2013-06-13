@@ -1,8 +1,6 @@
 package com.ymeng.orm;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static com.ymeng.orm.Database.INVALID_ID;
 import static com.ymeng.util.Collections.copy;
@@ -10,6 +8,7 @@ import static com.ymeng.util.Collections.copy;
 public class FlatObject {
 
     private final Map<String, Object> fieldMap = new HashMap<String, Object>();
+    private final Set<String> primaryKeys = new HashSet<String>();
     private final String tableName;
 
     public FlatObject(String tableName) {
@@ -23,13 +22,9 @@ public class FlatObject {
     public Set<String> fields() {
         Set<String> fields = copy(fieldMap.keySet());
         if (isNew()) {
-            excludeKeyFields(fields);
+            excludePrimaryKeys(fields);
         }
         return fields;
-    }
-
-    private void excludeKeyFields(Set<String> fields) {
-        fields.remove("id");
     }
 
     public Object value(String fieldName) {
@@ -40,7 +35,20 @@ public class FlatObject {
         return tableName;
     }
 
+    public void registerPrimaryKeys(String... keys) {
+        Collections.addAll(primaryKeys, keys);
+    }
+
     public boolean isNew() {
         return (Long)fieldMap.get("id") == INVALID_ID;
+    }
+
+    private void excludePrimaryKeys(Set<String> fields) {
+        if (primaryKeys.size() == 0) {
+            fields.remove("id");
+            return;
+        }
+
+        fields.removeAll(primaryKeys);
     }
 }
