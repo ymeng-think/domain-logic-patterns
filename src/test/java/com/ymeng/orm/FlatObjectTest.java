@@ -14,9 +14,9 @@ public class FlatObjectTest {
 
     @Before
     public void setUp() throws Exception {
-        flatObject = new FlatObject("student");
-        flatObject.registerField("name", "Tom");
-        flatObject.registerPrimaryKeys("id");
+        flatObject = new FlatObject("Student");
+        flatObject.registerField("Name", "Tom");
+        flatObject.registerPrimaryKeys("Id");
     }
 
     @Test

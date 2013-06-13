@@ -11,15 +11,10 @@ public class TableNameExtractor {
     }
 
     public String extract() {
-        String tableName;
-
         if (isMarkedByTable()) {
-            tableName = extractTableNameFromAnnotation();
-        } else {
-            tableName = clazz.getSimpleName();
+            return extractTableNameFromAnnotation();
         }
-
-        return tableName.toLowerCase();
+        return clazz.getSimpleName();
     }
 
     private boolean isMarkedByTable() {
