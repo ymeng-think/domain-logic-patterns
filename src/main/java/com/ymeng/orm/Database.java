@@ -1,11 +1,10 @@
 package com.ymeng.orm;
 
-import javax.swing.event.TreeExpansionEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.List;
 
+import static com.ymeng.orm.FlatObjectCollection.load;
 import static java.text.MessageFormat.format;
 
 public class Database {
@@ -55,4 +54,9 @@ public class Database {
         flattener.flatten().save(connection);
     }
 
+    public <T> T loadById(long id) {
+        FlatObject flatObject = load(connection, id);
+        Extruder<T> extruder = new Extruder<T>(flatObject);
+        return extruder.extrude();
+    }
 }

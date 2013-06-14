@@ -17,4 +17,8 @@ public class Product {
     public void save() {
         current().save(this);
     }
+
+    public static Product load(long id) {
+        return current().loadById(id);
+    }
 }

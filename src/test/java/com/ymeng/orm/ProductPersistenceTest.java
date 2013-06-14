@@ -35,4 +35,15 @@ public class ProductPersistenceTest extends DatabaseTest {
         assertThat(resultSet, is(noMoreRow()));
     }
 
+    @Test
+    @Ignore
+    public void should_load_product_from_database() {
+        Product product = new Product("MS Word", "W");
+        product.save();
+
+        Product reloadedProduct = Product.load(1L);
+
+        assertThat(reloadedProduct, is(product));
+    }
+
 }

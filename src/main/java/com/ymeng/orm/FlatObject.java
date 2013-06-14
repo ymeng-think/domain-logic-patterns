@@ -1,5 +1,6 @@
 package com.ymeng.orm;
 
+import java.sql.Connection;
 import java.util.*;
 
 import static com.ymeng.orm.Database.INVALID_ID;

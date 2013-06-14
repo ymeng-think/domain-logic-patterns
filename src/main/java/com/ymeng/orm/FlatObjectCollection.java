@@ -1,5 +1,7 @@
 package com.ymeng.orm;
 
+import com.ymeng.orm.strategy.DataQueryStrategy;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,5 +28,9 @@ public class FlatObjectCollection {
         for (FlatObject object : objects) {
             generateManipulationStrategy(object, connection).execute();
         }
+    }
+
+    public static FlatObject load(Connection connection, long id) {
+        return new DataQueryStrategy(connection, id).execute();
     }
 }
