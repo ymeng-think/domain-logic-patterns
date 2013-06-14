@@ -8,10 +8,7 @@ public final class Collections {
 
     public static <T> Set<T> copy(Set<T> set) {
         Set<T> copy = new HashSet<T>();
-        for (T item : set) {
-            copy.add(item);
-        }
-
+        copy(set, copy);
         return copy;
     }
 
@@ -20,6 +17,14 @@ public final class Collections {
 
         for (Map.Entry<K, V> entry : from.entrySet()) {
             to.put(entry.getKey(), entry.getValue());
+        }
+    }
+
+    public static <T> void copy(Set<T> from, Set<T> to) {
+        to.clear();
+
+        for (T item : from) {
+            to.add(item);
         }
     }
 }
