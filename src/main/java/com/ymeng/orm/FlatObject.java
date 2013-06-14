@@ -1,7 +1,9 @@
 package com.ymeng.orm;
 
-import java.sql.Connection;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import static com.ymeng.orm.Database.INVALID_ID;
 import static com.ymeng.util.Collections.copy;
@@ -44,6 +46,38 @@ public class FlatObject {
 
     public boolean isNew() {
         return (Long)fieldMap.get("id") == INVALID_ID;
+    }
+
+    public FlatObject clone() {
+        FlatObject newObject = new FlatObject(this.tableName());
+        copy(this.fieldMap, newObject.fieldMap);
+        copy(this.primaryKeys, newObject.primaryKeys);
+
+        return newObject;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        FlatObject that = (FlatObject) o;
+
+        if (fieldMap != null ? !fieldMap.equals(that.fieldMap) : that.fieldMap != null) {
+            return false;
+        }
+        if (primaryKeys != null ? !primaryKeys.equals(that.primaryKeys) : that.primaryKeys != null) {
+            return false;
+        }
+        if (tableName != null ? !tableName.equals(that.tableName) : that.tableName != null) {
+            return false;
+        }
+
+        return true;
     }
 
     private void excludePrimaryKeys(Set<String> fields) {

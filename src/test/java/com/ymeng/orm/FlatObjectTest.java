@@ -6,6 +6,8 @@ import org.junit.Test;
 import static com.ymeng.matcher.Matchers.contains;
 import static com.ymeng.orm.Database.INVALID_ID;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
 public class FlatObjectTest {
@@ -43,5 +45,15 @@ public class FlatObjectTest {
         flatObject.registerField("id", INVALID_ID);
 
         assertThat(flatObject.fields(), contains("name"));
+    }
+
+    @Test
+    public void should_clone_itself() {
+        flatObject.registerField("id", 1L);
+
+        FlatObject clone = flatObject.clone();
+
+        assertThat(clone, not(sameInstance(flatObject)));
+        assertThat(clone, is(flatObject));
     }
 }
