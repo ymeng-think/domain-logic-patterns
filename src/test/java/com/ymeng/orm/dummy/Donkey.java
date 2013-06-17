@@ -9,10 +9,10 @@ import static com.ymeng.orm.Database.INVALID_ID;
 @Table(name = "Animal")
 public class Donkey {
 
-    private long id = INVALID_ID;
+    private int id = INVALID_ID;
 
     @PrimaryKey
-    private long ssid = INVALID_ID;
+    private int ssid = INVALID_ID;
 
     @Field(name = "nick_name")
     private String name;

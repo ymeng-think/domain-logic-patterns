@@ -45,8 +45,8 @@ public class DataRowEqualMatcher extends TypeSafeMatcher<ResultSet> {
     }
 
     private boolean isSameField(Object expected, ResultSet resultSet, int index) throws SQLException {
-        if (expected instanceof Long) {
-            return resultSet.getLong(index) == (Long)expected;
+        if (expected instanceof Integer) {
+            return resultSet.getInt(index) == (Integer)expected;
         } else if (expected instanceof Double) {
             return resultSet.getDouble(index) == (Double)expected;
         } else if (expected instanceof Date) {

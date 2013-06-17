@@ -38,7 +38,7 @@ public class DataInsertStrategyTest extends DatabaseTest {
         strategy.execute();
 
         ResultSet resultSet = productTable.findAll();
-        assertThat(resultSet, nextRowContains(1L, "MS Word", "W"));
+        assertThat(resultSet, nextRowContains(1, "MS Word", "W"));
         assertThat(resultSet.next(), is(false));
     }
 }

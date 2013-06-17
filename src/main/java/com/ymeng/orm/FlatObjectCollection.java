@@ -30,7 +30,7 @@ public class FlatObjectCollection {
         }
     }
 
-    public static <T> FlatObject load(Connection connection, Class<?> clazz, long id) {
+    public static <T> FlatObject load(Connection connection, Class<?> clazz, int id) {
         return new DataQueryStrategy(connection, null).execute();
     }
 }

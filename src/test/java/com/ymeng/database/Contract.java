@@ -19,12 +19,12 @@ public class Contract {
         this.db = db;
     }
 
-    public void insert(long contractID, long productID, double revenue, Date dateSigned) {
+    public void insert(int contractID, int productID, double revenue, Date dateSigned) {
         PreparedStatement command = null;
         try {
             command = db.prepareStatement(insertContractStatement);
-            command.setLong(1, contractID);
-            command.setLong(2, productID);
+            command.setInt(1, contractID);
+            command.setInt(2, productID);
             command.setDouble(3, revenue);
             command.setDate(4, new java.sql.Date(dateSigned.getTime()));
 

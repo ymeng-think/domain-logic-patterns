@@ -37,7 +37,7 @@ public class Database {
     };
 
 
-    public static final long INVALID_ID = -1;
+    public static final int INVALID_ID = -1;
     private final Connection connection;
 
     public Database(Connection connection) {
@@ -53,7 +53,7 @@ public class Database {
         flattener.flatten().save(connection);
     }
 
-    public <T> T loadById(Class<T> clazz, long id) {
+    public <T> T loadById(Class<T> clazz, int id) {
         FlatObject flatObject = FlatObjectCollection.load(connection, clazz, id);
         Extruder<T> extruder = new Extruder<T>(flatObject);
         return extruder.extrude();

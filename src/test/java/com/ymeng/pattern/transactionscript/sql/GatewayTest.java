@@ -35,10 +35,10 @@ public class GatewayTest extends DatabaseTest {
 
     @Test
     public void should_find_recognitions_from_database() throws SQLException {
-        recognition.insert(1L, 100, date(2012, 2, 1));
-        recognition.insert(2L, 100, date(2012, 2, 2));
+        recognition.insert(1, 100, date(2012, 2, 1));
+        recognition.insert(2, 100, date(2012, 2, 2));
 
-        ResultSet result = gateway.findRecognitionsFor(1L, date(2012, 2, 1));
+        ResultSet result = gateway.findRecognitionsFor(1, date(2012, 2, 1));
 
         assertThat(result.next(), is(true));
         assertThat(result.getDouble(1), is(100.0));
@@ -48,20 +48,20 @@ public class GatewayTest extends DatabaseTest {
 
     @Test
     public void should_NOT_find_any_recognitions_when_key_is_NOT_match() throws SQLException {
-        recognition.insert(1L, 100, date(2012, 2, 1));
+        recognition.insert(1, 100, date(2012, 2, 1));
 
-        ResultSet result = gateway.findRecognitionsFor(1L, date(2012, 1, 31));
+        ResultSet result = gateway.findRecognitionsFor(1, date(2012, 1, 31));
 
         assertThat(result, is(noMoreRow()));
     }
 
     @Test
     public void should_find_contract_from_database() throws SQLException {
-        product.insert(1L, "spreadsheet", "S");
-        contract.insert(1L, 1L, 100, date(2011, 1, 1));
-        contract.insert(2L, 1L, 500, date(2011, 10, 1));
+        product.insert(1, "spreadsheet", "S");
+        contract.insert(1, 1, 100, date(2011, 1, 1));
+        contract.insert(2, 1, 500, date(2011, 10, 1));
 
-        ResultSet result = gateway.findContract(1L);
+        ResultSet result = gateway.findContract(1);
 
         assertThat(result.next(), is(true));
         assertThat(result.getDouble(1), is(100.0));
@@ -72,19 +72,19 @@ public class GatewayTest extends DatabaseTest {
 
     @Test
     public void should_NOT_find_any_contract_when_key_is_NOT_match() throws SQLException {
-        product.insert(1L, "spreadsheet", "S");
-        contract.insert(1L, 1L, 100, date(2011, 1, 1));
+        product.insert(1, "spreadsheet", "S");
+        contract.insert(1, 1, 100, date(2011, 1, 1));
 
-        ResultSet result = gateway.findContract(2L);
+        ResultSet result = gateway.findContract(2);
 
         assertThat(result, is(noMoreRow()));
     }
 
     @Test
     public void should_insert_recognition() throws SQLException {
-        gateway.insertRecognition(1L, dollars(100.0), date(2012, 2, 1));
+        gateway.insertRecognition(1, dollars(100.0), date(2012, 2, 1));
 
-        ResultSet result = gateway.findRecognitionsFor(1L, date(2012, 2, 1));
+        ResultSet result = gateway.findRecognitionsFor(1, date(2012, 2, 1));
         assertThat(result.next(), is(true));
         assertThat(result.getDouble(1), is(100.0));
         assertThat(result, is(noMoreRow()));

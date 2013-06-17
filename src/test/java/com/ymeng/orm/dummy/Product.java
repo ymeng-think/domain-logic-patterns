@@ -5,7 +5,7 @@ import static com.ymeng.orm.Database.current;
 
 public class Product {
 
-    private long id = INVALID_ID;
+    private int id = INVALID_ID;
     private String name;
     private String type;
 
@@ -18,7 +18,7 @@ public class Product {
         current().save(this);
     }
 
-    public static Product load(long id) {
+    public static Product load(int id) {
         return current().loadById(Product.class, id);
     }
 }

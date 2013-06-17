@@ -21,11 +21,11 @@ public class Product {
         this.db = db;
     }
 
-    public void insert(long productID, String name, String type) {
+    public void insert(int productID, String name, String type) {
         PreparedStatement command = null;
         try {
             command = db.prepareStatement(insertProductStatement);
-            command.setLong(1, productID);
+            command.setInt(1, productID);
             command.setString(2, name);
             command.setString(3, type);
 

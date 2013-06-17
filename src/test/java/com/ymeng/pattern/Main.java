@@ -22,7 +22,7 @@ public class Main {
     public static void main(String[] args) throws IOException, SQLException {
         Connection connection = connect();
         cleanAllTables(connection);
-        long contractID = 1L;
+        int contractID = 1;
         buildContract(connection, "Microsoft Excel", "S", contractID, 120, date(2012, 1, 1));
 
         String patternName = readInPatternName("Please enter domain logic pattern: ");
@@ -47,7 +47,7 @@ public class Main {
 
     private static void printRecognitionRow(ResultSet resultSet) throws SQLException {
         StringBuilder text = new StringBuilder();
-        text.append("contract:").append(resultSet.getLong("contract")).append(", ");
+        text.append("contract:").append(resultSet.getInt("contract")).append(", ");
         text.append("amount:").append(resultSet.getDouble("amount")).append(", ");
         text.append("recognized_on:").append(resultSet.getDate("recognized_on"));
 
@@ -68,15 +68,15 @@ public class Main {
         throw new IllegalArgumentException("Can NOT identify domain logic pattern name");
     }
 
-    private static void buildContract(Connection connection, String productName, String productType, long contractID, double revenue, Date dateSigned) {
-        final long productID = 1L;
+    private static void buildContract(Connection connection, String productName, String productType, int contractID, double revenue, Date dateSigned) {
+        final int productID = 1;
         new Product(connection).insert(productID, productName, productType);
         new Contract(connection).insert(contractID, productID, revenue, dateSigned);
     }
 
 
     private static interface Pattern {
-        void calculateRevenueRecognitions(long contractNumber);
+        void calculateRevenueRecognitions(int contractNumber);
     }
 
     private static class TransactionScript implements Pattern {
@@ -88,7 +88,7 @@ public class Main {
         }
 
         @Override
-        public void calculateRevenueRecognitions(long contractNumber) {
+        public void calculateRevenueRecognitions(int contractNumber) {
             service.calculateRevenueRecognitions(contractNumber);
         }
     }

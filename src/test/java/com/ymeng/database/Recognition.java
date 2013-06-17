@@ -24,11 +24,11 @@ public class Recognition {
         this.db = db;
     }
 
-    public void insert(long contractID, double amount, Date recognizedOn) {
+    public void insert(int contractID, double amount, Date recognizedOn) {
         PreparedStatement command = null;
         try {
             command = db.prepareStatement(insertRecognitionStatement);
-            command.setLong(1, contractID);
+            command.setInt(1, contractID);
             command.setDouble(2, amount);
             command.setDate(3, new java.sql.Date(recognizedOn.getTime()));
 

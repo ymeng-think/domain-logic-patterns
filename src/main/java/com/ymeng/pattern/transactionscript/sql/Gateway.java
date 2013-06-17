@@ -24,10 +24,10 @@ public class Gateway {
         this.db = db;
     }
 
-    public ResultSet findRecognitionsFor(long contractID, Date asof) {
+    public ResultSet findRecognitionsFor(int contractID, Date asof) {
         try {
             command = db.prepareStatement(FIND_RECOGNITIONS_STATEMENT);
-            command.setLong(1, contractID);
+            command.setInt(1, contractID);
             command.setDate(2, convertToSqlDate(asof));
 
             return queryBy(command);
@@ -36,10 +36,10 @@ public class Gateway {
         }
     }
 
-    public ResultSet findContract(long contractID) {
+    public ResultSet findContract(int contractID) {
         try {
             command = db.prepareStatement(FIND_CONTRACT_STATEMENT);
-            command.setLong(1, contractID);
+            command.setInt(1, contractID);
 
             return queryBy(command);
         } catch (SQLException e) {
@@ -47,10 +47,10 @@ public class Gateway {
         }
     }
 
-    public void insertRecognition(long contractID, Money money, Date recognitionDate) {
+    public void insertRecognition(int contractID, Money money, Date recognitionDate) {
         try {
             command = db.prepareStatement(INSERT_RECOGNITION);
-            command.setLong(1, contractID);
+            command.setInt(1, contractID);
             command.setDouble(2, money.value());
             command.setDate(3, convertToSqlDate(recognitionDate));
 

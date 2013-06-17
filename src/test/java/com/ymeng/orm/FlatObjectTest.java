@@ -27,7 +27,7 @@ public class FlatObjectTest {
     }
 
     @Test
-    public void should_be_new_object_when_primary_key_field_is_long_and_invalid() {
+    public void should_be_new_object_when_primary_key_field_is_number_and_invalid() {
         flatObject.registerField("id", INVALID_ID);
 
         assertThat(flatObject.isNew(), is(true));

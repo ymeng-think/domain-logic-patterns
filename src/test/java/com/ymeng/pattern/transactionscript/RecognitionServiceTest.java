@@ -47,16 +47,16 @@ public class RecognitionServiceTest extends DatabaseTest {
     @Test
     public void should_get_recognition_revenue() {
         Date asOf = date(2012, 2, 1);
-        recognition.insert(1L, 100, asOf);
+        recognition.insert(1, 100, asOf);
 
-        Money money = service.recognitionRevenue(1L, asOf);
+        Money money = service.recognitionRevenue(1, asOf);
 
         assertThat(money, is(Money.dollars(100)));
     }
 
     @Test
     public void should_calculate_revenue_recognitions_of_a_contract_about_word_processors() throws SQLException {
-        long contractID = 1L;
+        int contractID = 1;
         Date dateSigned = date(2012, 2, 1);
         double revenue = 100.0;
         buildContract("Microsoft Word", "W", contractID, revenue, dateSigned);
@@ -70,7 +70,7 @@ public class RecognitionServiceTest extends DatabaseTest {
 
     @Test
     public void should_calculate_revenue_recognitions_of_a_contract_about_spreadsheets() throws SQLException {
-        long contractID = 1L;
+        int contractID = 1;
         Date dateSigned = date(2012, 1, 1);
         double revenue = 120.0;
         buildContract("Microsoft Excel", "S", contractID, revenue, dateSigned);
@@ -86,7 +86,7 @@ public class RecognitionServiceTest extends DatabaseTest {
 
     @Test
     public void should_calculate_revenue_recognitions_of_a_contract_about_databases() throws SQLException {
-        long contractID = 1L;
+        int contractID = 1;
         Date dateSigned = date(2012, 1, 1);
         double revenue = 120.0;
         buildContract("Microsoft SQL Server", "D", contractID, revenue, dateSigned);
@@ -100,8 +100,8 @@ public class RecognitionServiceTest extends DatabaseTest {
         assertThat(result, is(noMoreRow()));
     }
 
-    private void buildContract(String productName, String productType, long contractID, double revenue, Date dateSigned) {
-        product.insert(1L, productName, productType);
-        contract.insert(contractID, 1L, revenue, dateSigned);
+    private void buildContract(String productName, String productType, int contractID, double revenue, Date dateSigned) {
+        product.insert(1, productName, productType);
+        contract.insert(contractID, 1, revenue, dateSigned);
     }
 }

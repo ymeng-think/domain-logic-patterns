@@ -19,7 +19,7 @@ public class RecognitionService {
         this.gateway = new Gateway(connection);
     }
 
-    public Money recognitionRevenue(long contractNumber, Date asOf) {
+    public Money recognitionRevenue(int contractNumber, Date asOf) {
         Money result = Money.dollars(0);
 
         ResultSet resultSet = gateway.findRecognitionsFor(contractNumber, asOf);
@@ -35,7 +35,7 @@ public class RecognitionService {
         }
     }
 
-    public void calculateRevenueRecognitions(long contractNumber) {
+    public void calculateRevenueRecognitions(int contractNumber) {
         ResultSet contracts = gateway.findContract(contractNumber);
 
         Money totalRevenue = null;

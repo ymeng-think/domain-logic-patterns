@@ -31,7 +31,7 @@ public class ProductPersistenceTest extends DatabaseTest {
         product.save();
 
         ResultSet resultSet = productTable.findAll();
-        assertThat(resultSet, nextRowContains(1L, "MS Word", "W"));
+        assertThat(resultSet, nextRowContains(1, "MS Word", "W"));
         assertThat(resultSet, is(noMoreRow()));
     }
 
@@ -41,7 +41,7 @@ public class ProductPersistenceTest extends DatabaseTest {
         Product product = new Product("MS Word", "W");
         product.save();
 
-        Product reloadedProduct = Product.load(1L);
+        Product reloadedProduct = Product.load(1);
 
         assertThat(reloadedProduct, is(product));
     }

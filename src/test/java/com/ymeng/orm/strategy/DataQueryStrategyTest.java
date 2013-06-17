@@ -16,7 +16,7 @@ public class DataQueryStrategyTest extends DatabaseTest {
         super.setUp();
 
         Product product = new Product(connection);
-        product.insert(1L, "MS Word", "W");
+        product.insert(1, "MS Word", "W");
     }
 
     @Test
