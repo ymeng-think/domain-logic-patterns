@@ -19,6 +19,6 @@ public class Product {
     }
 
     public static Product load(long id) {
-        return current().loadById(id);
+        return current().loadById(Product.class, id);
     }
 }

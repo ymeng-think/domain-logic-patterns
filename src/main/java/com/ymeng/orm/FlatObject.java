@@ -36,6 +36,10 @@ public class FlatObject {
         return fields;
     }
 
+    public Set<String> primaryKeys() {
+        return copy(primaryKeys);
+    }
+
     public Object value(String fieldName) {
         return fieldMap.get(fieldName);
     }
@@ -45,7 +49,7 @@ public class FlatObject {
     }
 
     public boolean isNew() {
-        return (Long)fieldMap.get("id") == INVALID_ID;
+        return fieldMap.get("id").equals(INVALID_ID);
     }
 
     public FlatObject clone() {

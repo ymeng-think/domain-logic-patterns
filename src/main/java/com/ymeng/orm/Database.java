@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static com.ymeng.orm.FlatObjectCollection.load;
 import static java.text.MessageFormat.format;
 
 public class Database {
@@ -54,9 +53,11 @@ public class Database {
         flattener.flatten().save(connection);
     }
 
-    public <T> T loadById(long id) {
-        FlatObject flatObject = load(connection, id);
+    public <T> T loadById(Class<T> clazz, long id) {
+        FlatObject flatObject = FlatObjectCollection.load(connection, clazz, id);
         Extruder<T> extruder = new Extruder<T>(flatObject);
         return extruder.extrude();
     }
+
+
 }
